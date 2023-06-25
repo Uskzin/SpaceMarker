@@ -115,3 +115,19 @@ try:
             pos_mensagem = (10, 30 + r * 20)
             tela.blit(texto_mensagem, pos_mensagem)
 
+        pygame.display.flip()
+        clock.tick(60)
+        keys=pygame.key.get_pressed()
+        if keys[pygame.K_F10]:
+            salvamento_de_pontos("points.txt")
+
+        elif keys[pygame.K_F12]:
+            reset_de_marcações()
+        elif keys[pygame.K_F11]:
+            carregar_pontos("points.txt")
+
+except Exception as erro:
+    # Lidar com erros
+     print(f"Ocorreu um erro: {erro}")
+     pygame.quit()
+     sys()
