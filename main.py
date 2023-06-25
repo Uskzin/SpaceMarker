@@ -1,5 +1,9 @@
 import pygame
+import pygame
+import tkinter as tk
+from tkinter import simpledialog
 import winsound
+
 pygame.init()
 
 tamanho = (800,600)
