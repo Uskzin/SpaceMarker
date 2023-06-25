@@ -21,3 +21,9 @@ vermelho = (255, 0, 0)
 marcacoes = {}
 linhas = []
 distancias = []
+"Funçoes"
+def obter_nome_estrela():
+    root = tk.Tk()
+    root.withdraw()
+    nome = simpledialog.askstring("Nome da Estrela", "Digite o nome da estrela:")
+    return nome
