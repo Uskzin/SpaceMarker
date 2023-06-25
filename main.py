@@ -51,4 +51,20 @@ def salvamento_de_pontos(filename):
 def reset_de_marcações():
     global estrelas,circulos
     estrelas=[]
-    circulos=[]         
+    circulos=[]   
+
+#GAME
+
+try:
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                salvamento_de_pontos("points.txt") 
+                pygame.quit()  
+
+            if event.type == pygame.KEYDOWN and event.key== pygame.K_ESCAPE:
+                with open("points.txt", "w") as arquivo:
+                    for posicao, nome in estrelas():
+                        arquivo.write(f"{posicao[0]},{posicao[1]},{nome}\n")
+                    pygame.quit()
+                    sys()
