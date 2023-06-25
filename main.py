@@ -101,3 +101,17 @@ try:
                 texto_distancia = fonte_distancia.render(f"Distância: {distance:.2f}", True, branco)
                 pos_distancia = ((p1[0] + p2[0]) // 2, (p1[1] + p2[1]) // 2)
                 tela.blit(texto_distancia, pos_distancia)
+
+        fonte=pygame.font.Font(None,18)
+        texto = fonte.render(f"estrelas encontradas: {len(estrelas)}", True, (branco))
+        tela.blit(texto, (10, 10))
+        opções =["Pressione F10 para salvar os dados;",
+                "Pressione F11 para carregar os dados;",
+                "Pressione F12 para excluir os dados; "]
+        
+        fonte_da_opção=pygame.font.Font(None,16)
+        for r, opções in enumerate (opções):
+            texto_mensagem = fonte_da_opção.render(opções, True, branco)
+            pos_mensagem = (10, 30 + r * 20)
+            tela.blit(texto_mensagem, pos_mensagem)
+
