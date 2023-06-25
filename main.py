@@ -16,4 +16,8 @@ pygame.mixer.music.load("Space_Machine_Power.mp3")
 pygame.mixer.music.play(-1) 
 icone = pygame.image.load("space.png")
 pygame.display.set_icon(icone)
-
+branco = (255, 255, 255)
+vermelho = (255, 0, 0) 
+marcacoes = {}
+linhas = []
+distancias = []
