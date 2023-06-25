@@ -68,3 +68,18 @@ try:
                         arquivo.write(f"{posicao[0]},{posicao[1]},{nome}\n")
                     pygame.quit()
                     sys()
+                    
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F10:
+                    salvamento_de_pontos("points.txt")    
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                if pos[0] < tamanho[0] and pos[1] < tamanho[1]:
+                    
+                    circulos.append(pos)
+                    
+                item=simpledialog.askstring("Space ", "Nome da Estrela")
+                print (item)
+                if item == None:
+                    item = "desconhecido "+str(pos)
+                estrelas.append((pos, item))
