@@ -149,3 +149,54 @@ try:
                         arquivo.write(f"{posicao[0]},{posicao[1]},{nome}\n")
                     pygame.quit()
                     sys()
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pontos.append(event.pos)
+                if event.button == 1:
+                    posicao_mouse = pygame.mouse.get_pos()
+                    if posicao_mouse[0] < tamanho_tela[0] and posicao_mouse[1] < tamanho_tela[1]:
+                        circulos.append(posicao_mouse)
+                        estrelas_encontradas += 1
+                    nome_estrela = obter_nome_estrela()
+                    marcacoes[posicao_mouse] = nome_estrela
+
+        # Preenche a tela com a cor branca
+        janela.blit(fundo, (0, 0))
+
+
+        for posicao, nome in marcacoes.items():
+            # Desenhar uma marcação (círculo) na posição
+            pygame.draw.circle(janela, branco, posicao, 5)
+
+            # Desenhar o nome da estrela
+            fonte = pygame.font.Font(None, 20)
+            texto = fonte.render(nome, True, branco)
+            texto = fonte.render(f"{nome} ({posicao[0]}, {posicao[1]})", True, branco)
+            janela.blit(texto, (posicao[0], posicao[1] + 20))
+
+        # Desenha as linhas e mostra as distâncias
+        for i in range(len(pontos) - 1):
+            ponto1 = pontos[i]
+            ponto2 = pontos[i + 1]
+            pygame.draw.line(janela, branco, ponto1, ponto2, 2)
+
+            # Calcula a soma das distâncias entre X e Y
+            distancia_x = abs(ponto2[0] - ponto1[0])
+            distancia_y = abs(ponto2[1] - ponto1[1])
+            soma_distancias = distancia_x + distancia_y
+
+            # Cria um texto com a soma das distâncias
+            fonte = pygame.font.Font(None, 20)
+            texto = fonte.render("Soma das distâncias: {}".format(soma_distancias), True, branco)
+            posicao_texto = ((ponto1[0] + ponto2[0]) // 2, (ponto1[1] + ponto2[1]) // 2)
+            janela.blit(texto, posicao_texto)
+
+        # Desenha os círculos nas posições clicadas
+        for posicao in circulos:
+            pygame.draw.circle(janela, branco, posicao, 10)
+
+        # Exibe a mensagem temporária, se houver
+        if mensagem_tempo > 0:
+            mensagem_texto_renderizado = fonte_opcoes.render(mensagem_texto, True, branco)
+            janela.blit(mensagem_texto_renderizado, mensagem_posicao)
+            mensagem_tempo -= 1
