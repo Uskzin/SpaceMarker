@@ -116,3 +116,36 @@ for linha in linhas:
 mensagem_tempo = 0
 mensagem_texto = ""
 mensagem_posicao = (largura - 200, 10)
+
+# Loop principal do jogo
+try:
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F10:
+                    salvar_marcacoes()
+                    mensagem_tempo = 7 * 60  # 7 segundos
+                    mensagem_texto = "Marcações Salvas com Sucesso!"
+                elif event.key == pygame.K_F11:
+                    carregar_marcacoes()
+                    mensagem_tempo = 7 * 60  # 7 segundos
+                    mensagem_texto = "Marcações e Linhas Carregadas com Sucesso!"
+
+                elif event.key == pygame.K_F12:
+                    excluir_marcacoes()
+                    mensagem_tempo = 7 * 60  # 7 segundos
+                    mensagem_texto = "Todas as Marcações Foram Excluídas."
+
+            elif event.type == pygame.QUIT:
+                with open("marcacoes.txt", "w") as arquivo:
+                    for posicao, nome in marcacoes.items():
+                        arquivo.write(f"{posicao[0]},{posicao[1]},{nome}\n")
+                pygame.quit()
+                sys()
+
+            if event.type == pygame.KEYDOWN and event.key== pygame.K_ESCAPE:
+                with open("points.txt", "w") as arquivo:
+                    for posicao, nome in circulos():
+                        arquivo.write(f"{posicao[0]},{posicao[1]},{nome}\n")
+                    pygame.quit()
+                    sys()
