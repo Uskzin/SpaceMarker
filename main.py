@@ -46,3 +46,59 @@ linhas = []
 distancias = []
 circulos = []
 estrelas_encontradas = 0
+
+def desenhar_linhas():
+    for i in range(len(pontos) - 1):
+        ponto1 = pontos[i]
+        ponto2 = pontos[i + 1]
+        pygame.draw.line(janela, branco, ponto1, ponto2, 2)
+
+
+def obter_nome_estrela():
+    root = tk.Tk()
+    root.withdraw()
+    nome = simpledialog.askstring("Nome da Estrela", "Digite o nome da estrela:")
+    return nome if nome else "Desconhecido"
+
+def salvar_marcacoes():
+    with open("marcacoes.txt", "w") as arquivo:
+        for posicao, nome in marcacoes.items():
+            arquivo.write(f"{posicao[0]},{posicao[1]},{nome}\n")
+        for linha in linhas:
+            arquivo.write(f"linha,{linha[0][0]},{linha[0][1]},{linha[1][0]},{linha[1][1]}\n")
+
+    print("Marcações e linhas salvas com sucesso!")
+
+
+def carregar_marcacoes():
+    try:
+        with open("marcacoes.txt", "r") as arquivo:
+            marcacoes.clear()
+            linhas.clear()
+            pontos.clear()  # Limpa a lista de pontos
+
+            for linha in arquivo:
+                dados = linha.strip().split(",")
+                if dados[0] == "linha":
+                    x1, y1, x2, y2 = map(int, dados[1:])
+                    linhas.append([(x1, y1), (x2, y2)])
+                else:
+                    posicao_x, posicao_y, nome = dados
+                    marcacoes[(int(posicao_x), int(posicao_y))] = nome
+                    pontos.append((int(posicao_x), int(posicao_y)))  # Adiciona os pontos à lista
+
+        # Desenha as linhas novamente após carregar as marcações
+        for linha in linhas:
+            pygame.draw.line(janela, branco, linha[0], linha[1], 2)
+
+        print("Marcações e linhas carregadas")
+    except FileNotFoundError:
+        print("Arquivo de Marcações não encontrado.")
+
+def excluir_marcacoes():
+    marcacoes.clear()
+    linhas.clear()
+    circulos.clear()
+    distancias.clear()
+    pontos.clear()
+    print("Todas as Marcações Foram Excluídas.")
