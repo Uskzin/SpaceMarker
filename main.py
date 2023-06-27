@@ -200,3 +200,22 @@ try:
             mensagem_texto_renderizado = fonte_opcoes.render(mensagem_texto, True, branco)
             janela.blit(mensagem_texto_renderizado, mensagem_posicao)
             mensagem_tempo -= 1
+
+        # Exibe as estrelas encontradas
+        estrelas_encontradas_texto = fonte_opcoes.render("Estrelas Encontradas: {}".format(estrelas_encontradas), True, branco)
+        janela.blit(estrelas_encontradas_texto, (10, 90))
+
+        # Exibe as opções no canto superior esquerdo
+        opcao_texto1 = fonte_opcoes.render("Opções:", True, branco)
+        opcao_texto2 = fonte_opcoes.render("F10 - Salvar as marcações e linhas", True, branco)
+        opcao_texto3 = fonte_opcoes.render("F11 - Carregar as marcações e linhas salvas", True, branco)
+        opcao_texto4 = fonte_opcoes.render("F12 - Excluir todas as marcações e linhas", True, branco)
+        janela.blit(opcao_texto1, (10, 10))
+        janela.blit(opcao_texto2, (10, 30))
+        janela.blit(opcao_texto3, (10, 50))
+        janela.blit(opcao_texto4, (10, 70))
+        pygame.display.update()
+
+# Manipulação de exceções
+except SystemExit:
+    pygame.quit()
