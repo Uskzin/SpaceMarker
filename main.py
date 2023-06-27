@@ -102,3 +102,17 @@ def excluir_marcacoes():
     distancias.clear()
     pontos.clear()
     print("Todas as Marcações Foram Excluídas.")
+
+# Fonte para exibir as opções
+fonte_opcoes = pygame.font.Font(None, 20)
+
+
+# Fonte para exibir a contagem de estrelas encontradas
+fonte_estrelas = pygame.font.Font(None, 20)
+for linha in linhas:
+    pygame.draw.line(janela, branco, linha[0], linha[1], 2)
+
+# Variáveis para controlar a exibição temporária das mensagens
+mensagem_tempo = 0
+mensagem_texto = ""
+mensagem_posicao = (largura - 200, 10)
