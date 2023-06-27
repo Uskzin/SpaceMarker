@@ -26,3 +26,23 @@ pygame.display.set_icon(icone)
 # Definição das cores
 branco = (255, 255, 255)
 vermelho = (255, 0, 0)
+
+# Carregamento dos recursos (sons, imagens, etc.)
+fundo = pygame.image.load("imagem.fundo.jpg")
+fundo = pygame.transform.scale(fundo, (largura, altura))
+
+# Criação da janela
+janela = pygame.display.set_mode((largura, altura))
+pygame.display.set_caption("SPACE MARKER")
+
+# Variáveis para armazenar os pontos clicados
+pontos = []
+
+# Variáveis para armazenar as marcações das estrelas
+marcacoes = {}
+
+# Variáveis para armazenar as linhas e as somas das distâncias
+linhas = []
+distancias = []
+circulos = []
+estrelas_encontradas = 0
